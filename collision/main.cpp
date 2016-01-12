@@ -102,13 +102,13 @@ void display(World *world)
     glm::value_ptr(world->objectModelMat));
 
   glBindVertexArray(world->objectVao);
-  glDrawArrays(GL_TRIANGLES, 0, 3);
+  glDrawArrays(GL_TRIANGLES, 0, world->objectPositions.size());
 
   glUniformMatrix4fv(world->modelMatUniform, 1, GL_FALSE,
     glm::value_ptr(glm::mat4(1.0f)));
 
   glBindVertexArray(world->wallVao);
-  glDrawArrays(GL_TRIANGLES, 0, 3);
+  glDrawArrays(GL_TRIANGLES, 0, world->wallPositions.size());
 }
 
 /*
@@ -189,7 +189,7 @@ int main(int argc, char* argv[])
   };
 
   world->objectPositions.assign(objectPositions,
-    objectPositions + sizeof(objectPositions));
+    objectPositions + sizeof(objectPositions) / sizeof(glm::vec3));
 
   glBufferData(GL_ARRAY_BUFFER,
     sizeof(world->objectPositions[0]) * world->objectPositions.size(),
@@ -217,7 +217,7 @@ int main(int argc, char* argv[])
   };
 
   world->wallPositions.assign(wallPositions,
-    wallPositions + sizeof(wallPositions));
+    wallPositions + sizeof(wallPositions) / sizeof(glm::vec3));
 
   glBufferData(GL_ARRAY_BUFFER,
     sizeof(world->wallPositions[0]) * world->wallPositions.size(),
