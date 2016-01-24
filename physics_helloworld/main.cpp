@@ -4,7 +4,7 @@
 
 int main()
 {
-  // Specify the AABB broadphase algorithm to be used to work out what objects
+  // Specify the dynamic AABB tree broadphase algorithm to be used to work out what objects
   // to test collision for.
   btBroadphaseInterface* broadphase = new btDbvtBroadphase();
 
@@ -43,7 +43,7 @@ int main()
   btCollisionShape* fallShape = new btSphereShape(1);
 
   // Instantiate the ground. Its orientation is the identity, Bullet quaternions
-  //are specified in x,y,z,w form. The position is 1 metre below the ground,
+  // are specified in x,y,z,w form. The position is 1 metre below the ground,
   // which compensates the 1m offset we had to put into the shape itself.
   btDefaultMotionState* groundMotionState = new btDefaultMotionState(
     btTransform(btQuaternion(0, 0, 0, 1), btVector3(0, -1, 0)));
